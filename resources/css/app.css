@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+/* Campo Activo (usuarios) y tema (apariencia): interruptor tipo switch */
+.user-active-field .switch,
+.theme-appearance-field .switch {
+    position: relative;
+    display: inline-block;
+    width: 26px;
+    height: 15px;
+}
+.user-active-field .switch input,
+.theme-appearance-field .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.user-active-field .slider,
+.theme-appearance-field .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+}
+.dark .user-active-field .slider,
+.dark .theme-appearance-field .slider {
+    background-color: #4b5563;
+}
+.user-active-field .slider:before,
+.theme-appearance-field .slider:before {
+    position: absolute;
+    content: "";
+    height: 11px;
+    width: 11px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+}
+.user-active-field .switch input:checked + .slider,
+.theme-appearance-field .switch input:checked + .slider {
+    background-color: #22c55e;
+}
+.user-active-field .switch input:focus + .slider,
+.theme-appearance-field .switch input:focus + .slider {
+    box-shadow: 0 0 1px #22c55e;
+}
+.user-active-field .switch input:checked + .slider:before,
+.theme-appearance-field .switch input:checked + .slider:before {
+    transform: translateX(11px);
+}
+.user-active-field .slider.round,
+.theme-appearance-field .slider.round {
+    border-radius: 15px;
+}
+.user-active-field .slider.round:before,
+.theme-appearance-field .slider.round:before {
+    border-radius: 50%;
+}
+.user-active-field .switch input:disabled + .slider,
+.theme-appearance-field .switch input:disabled + .slider {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.user-active-field .js-user-active-wrap.is-loading {
+    pointer-events: none;
+    opacity: 0.6;
+}

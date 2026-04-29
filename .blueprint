@@ -1,0 +1,128 @@
+created:
+    - app/Http/Controllers/SocialAccountController.php
+    - app/Http/Controllers/ScheduleController.php
+    - app/Http/Controllers/PollController.php
+    - app/Http/Controllers/PollOptionController.php
+    - app/Http/Controllers/CommentController.php
+    - app/Http/Controllers/LiveAnnouncementController.php
+    - app/Http/Controllers/SubscriptionController.php
+    - app/Http/Controllers/MessageController.php
+    - database/factories/UserFactory.php
+    - database/factories/TopicFactory.php
+    - database/factories/CountryFactory.php
+    - database/factories/SocialNetworkFactory.php
+    - database/factories/SocialAccountFactory.php
+    - database/factories/SocialAccountEventFactory.php
+    - database/factories/ScheduleFactory.php
+    - database/factories/CreatorLevelFactory.php
+    - database/factories/LiveAnnouncementFactory.php
+    - database/factories/PollFactory.php
+    - database/factories/PollOptionFactory.php
+    - database/factories/PollVoteFactory.php
+    - database/factories/CommentFactory.php
+    - database/factories/SubscriptionFactory.php
+    - database/factories/AdFactory.php
+    - database/factories/AdAssignmentFactory.php
+    - database/factories/MessageFactory.php
+    - database/factories/FollowerSnapshotFactory.php
+    - database/migrations/2026_03_19_121422_create_users_table.php
+    - database/migrations/2026_03_19_121423_create_topics_table.php
+    - database/migrations/2026_03_19_121424_create_countries_table.php
+    - database/migrations/2026_03_19_121425_create_social_networks_table.php
+    - database/migrations/2026_03_19_121426_create_social_accounts_table.php
+    - database/migrations/2026_03_19_121427_create_social_account_events_table.php
+    - database/migrations/2026_03_19_121428_create_schedules_table.php
+    - database/migrations/2026_03_19_121429_create_creator_levels_table.php
+    - database/migrations/2026_03_19_121430_create_live_announcements_table.php
+    - database/migrations/2026_03_19_121431_create_polls_table.php
+    - database/migrations/2026_03_19_121432_create_poll_options_table.php
+    - database/migrations/2026_03_19_121433_create_poll_votes_table.php
+    - database/migrations/2026_03_19_121434_create_comments_table.php
+    - database/migrations/2026_03_19_121435_create_subscriptions_table.php
+    - database/migrations/2026_03_19_121436_create_ads_table.php
+    - database/migrations/2026_03_19_121437_create_ad_assignments_table.php
+    - database/migrations/2026_03_19_121438_create_messages_table.php
+    - database/migrations/2026_03_19_121439_create_follower_snapshots_table.php
+    - app/Models/User.php
+    - app/Models/Topic.php
+    - app/Models/Country.php
+    - app/Models/SocialNetwork.php
+    - app/Models/SocialAccount.php
+    - app/Models/SocialAccountEvent.php
+    - app/Models/Schedule.php
+    - app/Models/CreatorLevel.php
+    - app/Models/LiveAnnouncement.php
+    - app/Models/Poll.php
+    - app/Models/PollOption.php
+    - app/Models/PollVote.php
+    - app/Models/Comment.php
+    - app/Models/Subscription.php
+    - app/Models/Ad.php
+    - app/Models/AdAssignment.php
+    - app/Models/Message.php
+    - app/Models/FollowerSnapshot.php
+    - tests/Feature/Http/Controllers/SocialAccountControllerTest.php
+    - tests/Feature/Http/Controllers/ScheduleControllerTest.php
+    - tests/Feature/Http/Controllers/PollControllerTest.php
+    - tests/Feature/Http/Controllers/PollOptionControllerTest.php
+    - tests/Feature/Http/Controllers/CommentControllerTest.php
+    - tests/Feature/Http/Controllers/LiveAnnouncementControllerTest.php
+    - tests/Feature/Http/Controllers/SubscriptionControllerTest.php
+    - tests/Feature/Http/Controllers/MessageControllerTest.php
+    - app/Http/Requests/SocialAccountStoreRequest.php
+    - app/Http/Requests/SocialAccountUpdateRequest.php
+    - app/Http/Requests/ScheduleStoreRequest.php
+    - app/Http/Requests/ScheduleUpdateRequest.php
+    - app/Http/Requests/PollStoreRequest.php
+    - app/Http/Requests/PollUpdateRequest.php
+    - app/Http/Requests/PollOptionStoreRequest.php
+    - app/Http/Requests/PollOptionUpdateRequest.php
+    - app/Http/Requests/CommentStoreRequest.php
+    - app/Http/Requests/CommentUpdateRequest.php
+    - app/Http/Requests/LiveAnnouncementStoreRequest.php
+    - app/Http/Requests/LiveAnnouncementUpdateRequest.php
+    - resources/views/socialAccount/index.blade.php
+    - resources/views/socialAccount/create.blade.php
+    - resources/views/socialAccount/show.blade.php
+    - resources/views/socialAccount/edit.blade.php
+    - resources/views/schedule/index.blade.php
+    - resources/views/schedule/create.blade.php
+    - resources/views/schedule/show.blade.php
+    - resources/views/schedule/edit.blade.php
+    - resources/views/poll/index.blade.php
+    - resources/views/poll/create.blade.php
+    - resources/views/poll/show.blade.php
+    - resources/views/poll/edit.blade.php
+    - resources/views/pollOption/index.blade.php
+    - resources/views/pollOption/create.blade.php
+    - resources/views/pollOption/show.blade.php
+    - resources/views/pollOption/edit.blade.php
+    - resources/views/comment/index.blade.php
+    - resources/views/comment/create.blade.php
+    - resources/views/comment/show.blade.php
+    - resources/views/comment/edit.blade.php
+    - resources/views/liveAnnouncement/index.blade.php
+    - resources/views/liveAnnouncement/create.blade.php
+    - resources/views/liveAnnouncement/show.blade.php
+    - resources/views/liveAnnouncement/edit.blade.php
+updated:
+    - routes/web.php
+models:
+    User: { name: string, email: 'string:unique', password: string, timezone: 'string nullable', role: 'enum:creator,follower,admin default:creator', level_id: 'id nullable', is_claimed: 'boolean default:false', timestamps: timestamps }
+    Topic: { name: string, slug: string }
+    Country: { name: string, code: string }
+    SocialNetwork: { name: string, slug: string }
+    SocialAccount: { user_id: id, social_network_id: id, username: string, url: 'string nullable', current_status: 'enum:active,deleted,stolen default:active', is_verified: 'boolean default:false', last_checked_at: 'timestamp nullable', timestamps: timestamps }
+    SocialAccountEvent: { social_account_id: id, type: 'enum:registered,verified,deleted,stolen,username_changed', meta: 'json nullable', timestamps: timestamps }
+    Schedule: { user_id: id, days: json, time: time }
+    CreatorLevel: { name: string, min_followers: integer, max_followers: integer, badge: 'string nullable' }
+    LiveAnnouncement: { user_id: id, title: string, scheduled_at: timestamp, description: 'text nullable' }
+    Poll: { user_id: id, question: string, type: 'enum:yes_no,multiple', is_active: 'boolean default:true', expires_at: 'timestamp nullable' }
+    PollOption: { poll_id: id, text: string }
+    PollVote: { poll_id: id, user_id: id, option_id: id }
+    Comment: { user_id: id, creator_id: id, content: text }
+    Subscription: { user_id: id, type: 'enum:free,pro,lifetime default:free', ads_enabled: 'boolean default:true', expires_at: 'timestamp nullable' }
+    Ad: { title: string, image: 'string nullable', link: 'string nullable', type: 'enum:global,creator', active: 'boolean default:true' }
+    AdAssignment: { ad_id: id, user_id: 'id nullable' }
+    Message: { from_user_id: 'id nullable', to_user_id: id, content: text, channel: 'enum:whatsapp', status: 'enum:pending,sent,failed default:pending' }
+    FollowerSnapshot: { user_id: id, social_account_id: 'id nullable', followers_count: integer, source: 'enum:manual,auto_prompt default:manual', recorded_at: timestamp }

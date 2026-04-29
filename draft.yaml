@@ -1,0 +1,134 @@
+models:
+
+  User:
+    name: string
+    email: string:unique
+    password: string
+    timezone: string nullable
+    role: enum:creator,follower,admin default:creator
+    level_id: id nullable
+    is_claimed: boolean default:false
+    timestamps
+
+  Topic:
+    name: string
+    slug: string
+
+  Country:
+    name: string
+    code: string
+
+  SocialNetwork:
+    name: string
+    slug: string
+
+  SocialAccount:
+    user_id: id
+    social_network_id: id
+    username: string
+    url: string nullable
+    current_status: enum:active,deleted,stolen default:active
+    is_verified: boolean default:false
+    last_checked_at: timestamp nullable
+    timestamps
+
+  SocialAccountEvent:
+    social_account_id: id
+    type: enum:registered,verified,deleted,stolen,username_changed
+    meta: json nullable
+    timestamps
+
+  Schedule:
+    user_id: id
+    days: json
+    time: time
+
+  CreatorLevel:
+    name: string
+    min_followers: integer
+    max_followers: integer
+    badge: string nullable
+
+  LiveAnnouncement:
+    user_id: id
+    title: string
+    scheduled_at: timestamp
+    description: text nullable
+
+  Poll:
+    user_id: id
+    question: string
+    type: enum:yes_no,multiple
+    is_active: boolean default:true
+    expires_at: timestamp nullable
+
+  PollOption:
+    poll_id: id
+    text: string
+
+  PollVote:
+    poll_id: id
+    user_id: id
+    option_id: id
+
+  Comment:
+    user_id: id
+    creator_id: id
+    content: text
+
+  Subscription:
+    user_id: id
+    type: enum:free,pro,lifetime default:free
+    ads_enabled: boolean default:true
+    expires_at: timestamp nullable
+
+  Ad:
+    title: string
+    image: string nullable
+    link: string nullable
+    type: enum:global,creator
+    active: boolean default:true
+
+  AdAssignment:
+    ad_id: id
+    user_id: id nullable
+
+  Message:
+    from_user_id: id nullable
+    to_user_id: id
+    content: text
+    channel: enum:whatsapp
+    status: enum:pending,sent,failed default:pending
+
+  FollowerSnapshot:
+    user_id: id
+    social_account_id: id nullable
+    followers_count: integer
+    source: enum:manual,auto_prompt default:manual
+    recorded_at: timestamp
+
+controllers:
+
+  SocialAccount:
+    resource
+
+  Schedule:
+    resource
+
+  Poll:
+    resource
+
+  PollOption:
+    resource
+
+  Comment:
+    resource
+
+  LiveAnnouncement:
+    resource
+
+  Subscription:
+    store
+
+  Message:
+    store

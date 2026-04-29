@@ -1,0 +1,540 @@
+# DOCUMENTO FUNCIONAL – NUESTROMURO.COM
+
+## 1. VISIÓN GENERAL
+
+NuestroMuro es una plataforma web orientada a creadores de contenido (principalmente de TikTok) que permite:
+
+* Centralizar sus redes sociales
+* Mostrar horarios de actividad globales
+* Registrar crecimiento de seguidores
+* Interactuar con seguidores (comentarios, encuestas)
+* Publicar próximos eventos (lives)
+* Recibir mensajes sin exponer datos personales
+* Monetizar su perfil (suscripciones, anuncios, servicios)
+
+El sistema también permite a los visitantes descubrir creadores por temas, país, nivel y estado de sus cuentas.
+
+---
+
+## 2. TIPOS DE USUARIO
+
+### 2.1 Visitante (no autenticado)
+
+* Puede ver perfiles públicos
+* Puede explorar directorios (tema, país)
+* Puede votar y comentar solo si se registra
+
+### 2.2 Follower (usuario registrado)
+
+* Puede seguir creadores
+* Puede comentar
+* Puede votar en encuestas
+* Puede donar
+* Puede enviar mensajes (si está habilitado)
+
+### 2.3 Creador
+
+* Administra su perfil
+* Registra redes sociales
+* Define horarios
+* Publica encuestas
+* Publica próximos lives
+* Actualiza seguidores
+* Accede a monetización
+
+### 2.4 Administrador
+
+* Gestiona usuarios
+* Gestiona anuncios
+* Gestiona configuraciones
+* Supervisa actividad
+
+---
+
+## 3. LAYOUTS PRINCIPALES
+
+### 3.1 Layout Público
+
+Ruta: `layouts/public.blade.php`
+
+Contiene:
+
+* Header (logo, buscador, login/register)
+* Footer
+* Contenedor principal
+
+Uso:
+
+* Página de inicio
+* Perfiles públicos
+* Directorios
+
+---
+
+### 3.2 Layout App (Autenticado)
+
+Ruta: `layouts/app.blade.php`
+
+Contiene:
+
+* Navbar superior
+* Sidebar lateral (opcional)
+* Área de contenido
+
+Uso:
+
+* Panel de creador
+* Panel de follower
+
+---
+
+### 3.3 Layout Admin
+
+Ruta: `layouts/admin.blade.php`
+
+Contiene:
+
+* Sidebar administrativo
+* Navbar
+* Área de gestión
+
+Uso:
+
+* Panel administrativo
+
+---
+
+## 4. RUTAS Y PANTALLAS
+
+---
+
+# 🔓 4.1 AUTENTICACIÓN (Jetstream)
+
+## /login
+
+Función:
+
+* Inicio de sesión
+
+## /register
+
+Función:
+
+* Registro de usuario
+* Selección inicial (creador o follower)
+
+## /email/verify
+
+Función:
+
+* Verificación de correo
+
+---
+
+# 🌍 4.2 PÚBLICO
+
+---
+
+## /
+
+Página principal
+
+Función:
+
+* Mostrar creadores destacados
+* Mostrar directorios
+* Mostrar buscador
+
+Elementos:
+
+* Buscador
+* Listado por temas
+* Listado por país
+* Creadores recientes
+
+---
+
+## /u/{username}
+
+Perfil público normal
+
+## /@{username}
+
+Perfil público verificado
+
+---
+
+### Contenido del perfil:
+
+#### 1. Header
+
+* Avatar (128x128)
+* Username
+* Nivel (badge)
+* Estado (verificado, robado, eliminado)
+
+#### 2. Redes sociales
+
+* Lista de cuentas
+* Estado de cada cuenta
+
+#### 3. Horarios
+
+* Tabla de horarios
+* Conversión automática de zona horaria
+
+#### 4. Gráfica de seguidores
+
+* Evolución histórica
+* Basada en FollowerSnapshot
+
+#### 5. Próximos lives
+
+* Lista de eventos programados
+
+#### 6. Encuestas
+
+* Preguntas activas
+* Votación
+
+#### 7. Comentarios
+
+* Lista de comentarios
+* Formulario (si está autenticado)
+
+#### 8. Acciones
+
+* Seguir
+* Donar
+* Enviar mensaje
+
+---
+
+## /tema/{slug}
+
+Función:
+
+* Mostrar creadores por tema
+
+---
+
+## /pais/{code}
+
+Función:
+
+* Mostrar creadores por país
+
+---
+
+## /tema/{slug}/pais/{code}
+
+Función:
+
+* Filtro combinado
+
+---
+
+# 👤 4.3 PANEL DEL CREADOR
+
+Prefijo: `/creator`
+
+---
+
+## /creator/dashboard
+
+Función:
+
+* Resumen general
+
+Contenido:
+
+* Seguidores actuales
+* Última actualización
+* Estado de suscripción
+* Accesos rápidos
+
+---
+
+## /creator/profile
+
+Función:
+
+* Editar perfil
+
+Campos:
+
+* Nombre
+* Avatar (media library)
+* País
+* Temas
+* Timezone
+
+---
+
+## /creator/social-accounts
+
+Función:
+
+* Gestionar redes sociales
+
+Acciones:
+
+* Crear cuenta
+* Editar cuenta
+* Marcar como robada/eliminada
+* Ver historial
+
+---
+
+## /creator/schedules
+
+Función:
+
+* Gestionar horarios
+
+Acciones:
+
+* Crear horario
+* Seleccionar días
+* Definir hora
+
+---
+
+## /creator/followers
+
+Función:
+
+* Registrar seguidores
+
+Acciones:
+
+* Agregar conteo manual
+* Ver historial
+* Ver gráfica
+
+Regla:
+
+* Recordatorio cada 30 días
+
+---
+
+## /creator/lives
+
+Función:
+
+* Publicar próximos lives
+
+---
+
+## /creator/polls
+
+Función:
+
+* Crear encuestas
+
+Opciones:
+
+* Sí/No
+* Opción múltiple
+* Fecha de expiración o indefinida
+
+---
+
+## /creator/subscription
+
+Función:
+
+* Ver plan actual
+* Cambiar plan
+
+---
+
+## /creator/contact
+
+Función:
+
+* Activar WhatsApp proxy
+
+---
+
+# 💬 4.4 INTERACCIÓN
+
+---
+
+## Comentarios
+
+Componente:
+
+* components/comments.blade.php
+
+Función:
+
+* Crear y listar comentarios
+
+---
+
+## Donaciones
+
+Función:
+
+* Enviar dinero al creador
+
+---
+
+## Mensajes
+
+Ruta:
+
+* /contact/{creator}
+
+Función:
+
+* Enviar mensaje sin exponer datos
+
+---
+
+# ⚙️ 4.5 ADMIN
+
+Prefijo: `/admin`
+
+---
+
+## /admin/dashboard
+
+Función:
+
+* Vista general
+
+---
+
+## /admin/users
+
+Función:
+
+* Gestionar usuarios
+
+---
+
+## /admin/social-accounts
+
+Función:
+
+* Supervisar cuentas
+
+---
+
+## /admin/ads
+
+Función:
+
+* Crear anuncios
+* Asignar anuncios
+
+---
+
+## /admin/settings
+
+Función:
+
+* Configuración global
+
+---
+
+# 🧩 5. COMPONENTES
+
+---
+
+## UI
+
+* navbar
+* sidebar
+* footer
+
+---
+
+## Perfil
+
+* profile-card
+* social-links
+* schedule-table
+* follower-chart
+
+---
+
+## Interacción
+
+* comments
+* donation-button
+* contact-button
+
+---
+
+## Sistema
+
+* timezone-switcher
+* poll-component
+
+---
+
+# 🔁 6. FLUJOS IMPORTANTES
+
+---
+
+## Registro de creador
+
+1. Se registra
+2. Verifica email
+3. Configura perfil
+4. Agrega redes
+5. Define horarios
+
+---
+
+## Actualización de seguidores
+
+1. Entra al dashboard
+2. Sistema detecta tiempo sin actualizar
+3. Solicita actualización
+4. Guarda snapshot
+
+---
+
+## Encuesta
+
+1. Creador crea encuesta
+2. Usuarios votan
+3. Sistema guarda votos
+4. Se muestran resultados
+
+---
+
+## Verificación de cuenta
+
+1. Usuario registra cuenta
+2. Marca método
+3. Sistema guarda evento
+
+---
+
+# 🧠 7. REGLAS GENERALES
+
+* No duplicar lógica
+* Separar estado actual vs historial
+* Usar timezone real
+* No usar offsets manuales
+* Mantener datos históricos
+
+---
+
+# 🎯 8. OBJETIVO FINAL
+
+Sistema centralizado de:
+
+* identidad digital
+* actividad social
+* interacción con seguidores
+* monetización
+
+---
+
+FIN DEL DOCUMENTO
